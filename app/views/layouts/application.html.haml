@@ -11,9 +11,13 @@
     %p.alert= alert
 
   - if user_signed_in?
-    = "Hi, #{current_user.name}!"
-    = image_tag(current_user.image_url)
+    = "Logged in as #{current_user.name}"
+    / = image_tag(current_user.image_url)
+    %h2 Add debt
+    = link_to "I must pay someone", create_transfer_path(:type => "send")
+    %br
+    = link_to "Someone must pay me", create_transfer_path(:type => "receive")
   - else
     = link_to "Sign in with Facebook", user_omniauth_authorize_path(:facebook)
 
-    = yield
+  = yield

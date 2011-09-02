@@ -1,0 +1,18 @@
+%h1 New transaction
+
+= form_for @transfer do |f|
+  %table
+    %tr
+      %td Creditor
+      %td Debtor
+      %td Amount
+      %td Message
+    %tr
+      = f.hidden_field :debtor_id
+      
+      %td= select("transfer", "creditor_id", User.where("users.id != ?", current_user.id).all.collect {|p| [ p.name, p.id ] })
+      %td me
+      %td= f.text_field :amount
+      %td= f.text_field :message
+  
+  = f.submit "Submit"

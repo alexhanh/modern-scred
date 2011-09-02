@@ -2,7 +2,11 @@ Scred::Application.routes.draw do
   
   devise_for :users, :controllers => { :omniauth_callbacks => "users/omniauth_callbacks" }
 
-  root :to => 'home#index'
+  root :to => 'transfers#index'
+  
+  resources :transfers
+  
+  match 'tranfers/new/:type' => 'transfers#new', :as => :create_transfer
 
   # get '/users/auth/:provider' => 'users/omniauth_callbacks#passthru'
   
