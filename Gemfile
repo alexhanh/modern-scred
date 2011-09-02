@@ -7,6 +7,8 @@ gem 'rails', '3.1.0'
 
 gem 'pg'
 gem 'haml'
+gem 'devise'
+gem 'omniauth'
 
 # Gems used only for assets and not required
 # in production environments by default.
