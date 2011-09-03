@@ -7,6 +7,8 @@ Scred::Application.routes.draw do
   resources :transfers
   
   match 'tranfers/new/:type' => 'transfers#new', :as => :create_transfer
+  
+  match 'api/friends' => 'api#friends'
 
   # get '/users/auth/:provider' => 'users/omniauth_callbacks#passthru'
   
