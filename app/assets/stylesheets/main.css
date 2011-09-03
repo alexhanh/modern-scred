@@ -7,3 +7,12 @@
   float: right;
 }
 
+.profile_pic {
+  position: relative;
+  right: 10px;
+  top: 7px;
+}
+
+.balance {
+  
+}

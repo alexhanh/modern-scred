@@ -58,4 +58,8 @@ class User < ActiveRecord::Base
       end
     end
   end
+  
+  def profile_pic_url
+    "http://graph.facebook.com/#{self.fb_id}/picture?type=square"
+  end
 end

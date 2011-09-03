@@ -3,7 +3,7 @@
   = link_to "I must pay someone", create_transfer_path(:type => "send"), :class => "btn"
   = link_to "Someone must pay me", create_transfer_path(:type => "receive"), :class => "btn"
 
-%p= "Balance: #{@balance.round(1)}"
+%em= "Balance: #{@balance.round(1)}"
 
 %table.zebra-striped
   %tr
@@ -19,6 +19,6 @@
       %td= transfer.amount
       %td= transfer.message
       - if transfer.creator_id == current_user.id
-        %td= link_to 'Destroy', transfer, :confirm => 'Are you sure?', :method => :delete
+        %td= link_to('Destroy', transfer, :confirm => 'Are you sure?', :method => :delete)
       - else
         %td
