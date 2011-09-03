@@ -73,7 +73,27 @@ class ApiController < ApplicationController
   end
   
   def balance
-    balance = Transfer.where(:creditor_id => @current_user.id).sum("amount") - Transfer.where(:debtor_id => @current_user.id).sum("amount")
-    render :json => { :status => 'ok', :balance => balance }
+    total = Transfer.where(:creditor_id => @current_user.id).sum("amount") - Transfer.where(:debtor_id => @current_user.id).sum("amount")
+    
+    # name ovat kayttajalle miinusta
+    losses = Transfer.find_by_sql(["SELECT SUM(amount), creditor_id FROM transfers WHERE debtor_id = ? GROUP BY creditor_id", @current_user.id])
+    
+    # tuloa
+    gains = Transfer.find_by_sql(["SELECT SUM(amount), debtor_id FROM transfers WHERE creditor_id = ? GROUP BY debtor_id", @current_user.id])
+    
+    balances = {}
+    for f in losses
+      balances[f['creditor_id']] = -1*f['sum'].to_f
+    end
+    
+    for f in gains
+      if balances.has_key?(f['debtor_id'])
+        balances[f['debtor_id']] += f['sum'].to_f
+      else
+        balances[f['debtor_id']] = f['sum'].to_f
+      end
+    end
+    
+    render :json => { :status => 'ok', :total => total, :balances => balances }
   end
 end
