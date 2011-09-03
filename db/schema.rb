@@ -11,7 +11,12 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110902184316) do
+ActiveRecord::Schema.define(:version => 20110903014841) do
+
+  create_table "friendships", :force => true do |t|
+    t.integer "user_id"
+    t.integer "friend_id"
+  end
 
   create_table "transfers", :force => true do |t|
     t.integer  "creator_id"
@@ -38,6 +43,8 @@ ActiveRecord::Schema.define(:version => 20110902184316) do
     t.datetime "updated_at"
     t.string   "image_url"
     t.string   "name"
+    t.string   "fb_token"
+    t.string   "fb_id"
   end
 
   add_index "users", ["email"], :name => "index_users_on_email", :unique => true
