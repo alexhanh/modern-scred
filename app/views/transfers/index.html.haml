@@ -1,16 +1,17 @@
-%br
-%br
-= "Balance: #{@balance}"
-%br
-%br
+%h2 Add debt
+.create-buttons
+  = link_to "I must pay someone", create_transfer_path(:type => "send"), :class => "btn"
+  = link_to "Someone must pay me", create_transfer_path(:type => "receive"), :class => "btn"
 
-%table
+%p= "Balance: #{@balance.round(1)}"
+
+%table.zebra-striped
   %tr
-    %td Creditor
-    %td Debtor
-    %td Amount
-    %td Message
-    %td 
+    %th Creditor
+    %th Debtor
+    %th Amount
+    %th Message
+    %th 
   - for transfer in @transfers
     %tr
       %td= transfer.creditor.name

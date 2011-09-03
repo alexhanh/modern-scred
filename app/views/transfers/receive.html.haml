@@ -1,4 +1,4 @@
-%h1 New transaction
+%h2 New transaction
 
 = form_for @transfer do |f|
   %table
@@ -15,4 +15,4 @@
       %td= f.text_field :amount
       %td= f.text_field :message
   
-  = f.submit "Submit"
+  = f.submit "Submit", :class => "btn"

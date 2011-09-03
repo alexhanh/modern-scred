@@ -8,4 +8,8 @@ class ApiController < ApplicationController
     
     render :json => json
   end
+  
+  def register
+    
+  end
 end
