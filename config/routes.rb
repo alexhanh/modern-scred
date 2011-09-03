@@ -11,6 +11,9 @@ Scred::Application.routes.draw do
   match 'api/friends' => 'api#friends'
   match 'api/register' => 'api#register'
   match 'api/failed' => 'api#failed'
+  match 'api/transfers' => 'api#transfers'
+  match 'api/add_transfer' => 'api#add_transfer'
+  match 'api/balance' => 'api#balance'
 
   # get '/users/auth/:provider' => 'users/omniauth_callbacks#passthru'
   

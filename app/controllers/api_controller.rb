@@ -48,7 +48,7 @@ class ApiController < ApplicationController
           :id => transfer.id,
           :creator_id => transfer.creator_id,
           :debtor => { :id => transfer.debtor_id, :name => transfer.debtor.name },
-          :creditor => { :creditor => transfer.creditor_id, :name => transfer.creditor.name },
+          :creditor => { :id => transfer.creditor_id, :name => transfer.creditor.name },
           :amount => transfer.amount,
           :message => transfer.message
         }
@@ -60,6 +60,7 @@ class ApiController < ApplicationController
     transfer = Transfer.new()
     transfer.debtor_id = params[:debtor_id]
     transfer.creator_id = params[:creator_id]
+    transfer.creditor_id = params[:creditor_id]
     transfer.amount = params[:amount]
     transfer.message = params[:message]
     transfer.creator = @current_user
@@ -69,5 +70,10 @@ class ApiController < ApplicationController
     else
       render :json => {:status => 'error', :msg => 'error while saving transfer' }
     end
+  end
+  
+  def balance
+    balance = Transfer.where(:creditor_id => @current_user.id).sum("amount") - Transfer.where(:debtor_id => @current_user.id).sum("amount")
+    render :json => { :status => 'ok', :balance => balance }
   end
 end
