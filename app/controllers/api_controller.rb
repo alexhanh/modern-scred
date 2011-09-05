@@ -83,14 +83,18 @@ class ApiController < ApplicationController
     
     balances = {}
     for f in losses
-      balances[f['creditor_id']] = -1*f['sum'].to_f
+      # balances[f['creditor_id']] = -1*f['sum'].to_f
+      friend = User.find(f['creditor_id'])
+      balances[f['creditor_id']] = { :name => friend.name, :fb_id => friend.fb_id, :sum => -1*f['sum'].to_f }
+      
+      # balances << { :friend_id => f['creditor_id'], :sum => -1*f['sum'].to_f }
     end
     
     for f in gains
       if balances.has_key?(f['debtor_id'])
-        balances[f['debtor_id']] += f['sum'].to_f
+        balances[f['debtor_id']][:sum] += f['sum'].to_f
       else
-        balances[f['debtor_id']] = f['sum'].to_f
+        balances[f['debtor_id']] = { :name => friend.name, :fb_id => friend.fb_id, :sum => f['sum'].to_f }
       end
     end
     
