@@ -94,6 +94,7 @@ class ApiController < ApplicationController
       if balances.has_key?(f['debtor_id'])
         balances[f['debtor_id']][:sum] += f['sum'].to_f
       else
+        friend = User.find(f['debtor_id'])
         balances[f['debtor_id']] = { :name => friend.name, :fb_id => friend.fb_id, :sum => f['sum'].to_f }
       end
     end
