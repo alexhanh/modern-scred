@@ -64,11 +64,11 @@ class ApiController < ApplicationController
     transfer.amount = params[:amount]
     transfer.message = params[:message]
     transfer.creator = @current_user
-    
-    if transfer.save()
+        
+    if transfer.save
       render :json => {:status => 'ok' }
     else
-      render :json => {:status => 'error', :msg => 'error while saving transfer' }
+      render :json => {:status => 'error', :msg => transfer.errors.full_messages.join(", ") }
     end
   end
   
@@ -98,6 +98,8 @@ class ApiController < ApplicationController
         balances[f['debtor_id']] = { :name => friend.name, :fb_id => friend.fb_id, :sum => f['sum'].to_f }
       end
     end
+    
+    # @current_user.friends.where('id NOT IN (?)', )
     
     render :json => { :status => 'ok', :total => total, :balances => balances }
   end
