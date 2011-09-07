@@ -13,6 +13,8 @@ class Transfer < ActiveRecord::Base
   validates_presence_of :creator  
   validate :creator_must_be_debtor_or_creditor
   
+  validates_associated :creditor, :debtor
+  
   def creator_must_be_debtor_or_creditor
     if debtor_id != creator_id and creditor_id != creator_id
       errors.add(:creator_id, "cannot create debts for others!")
