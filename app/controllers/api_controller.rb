@@ -23,7 +23,7 @@ class ApiController < ApplicationController
   
   def register
     if params["email"].nil? || params["fb_id"].nil? || params["name"].nil? || params["token"].nil?
-      render :json => {:status => "not ok", :message => "parameters missing"}
+      render :json => {:status => "error", :message => "parameters missing"}
       return
     end
     
