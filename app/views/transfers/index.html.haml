@@ -2,7 +2,7 @@
 .create-buttons
   = link_to "I must pay someone", create_transfer_path(:type => "send"), :class => "btn"
   = link_to "Someone must pay me", create_transfer_path(:type => "receive"), :class => "btn"
-  = link_to "Shared expense", create_shared_path, :class => "btn"
+  = link_to "Shared expense", new_shared_path, :class => "btn"
 
 %em= "Balance: #{@balance.round(1)}"
 

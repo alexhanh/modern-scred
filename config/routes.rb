@@ -5,6 +5,11 @@ Scred::Application.routes.draw do
   root :to => 'transfers#index'
   
   resources :transfers
+  resources :shareds do
+    collection do
+      get 'friends'
+    end
+  end
   
   match 'tranfers/new/:type' => 'transfers#new', :as => :create_transfer
   
