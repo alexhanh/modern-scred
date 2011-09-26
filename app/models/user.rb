@@ -43,10 +43,12 @@ class User < ActiveRecord::Base
   
   def update_friends
     user = FbGraph::User.me(self.fb_token)
+
+    beginning = Time.now
     user = user.fetch
+    puts "Fetching friends from Graph API took #{Time.now - beginning} seconds"
+    
     for friend in user.friends
-      p friend.identifier
-      p friend.name
       u = User.find_by_fb_id(friend.identifier)
       if u
       else
