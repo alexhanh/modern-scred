@@ -1,0 +1,9 @@
+%h2 New shared expense
+
+= form_for @shared do |f|
+  %p 
+    = "The following people"
+    = f.text_field :sharers, "data-pre" => {}
+    
+  must pay me
+  = f.submit "Submit", :class => "btn"
